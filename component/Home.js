@@ -120,7 +120,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.grey900,
+    backgroundColor: Colors.black,
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   preview: {
     height: 85,
     width: 300,
-    backgroundColor: Colors.grey700,
+    backgroundColor: Colors.grey800,
     borderRadius: 10,
     alignItems: "center",
     flexDirection: "row",
