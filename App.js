@@ -1,16 +1,25 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screen/Home";
-import Setting from "./component/Menu";
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Home />
-      {/* <Setting /> */}
-      <StatusBar style="light" />
-    </View>
-  );
+import DocumentConverter from "./screen/DocumentConverter";
+export default class App extends React.Component {
+  render() {
+    const stack = createStackNavigator();
+    return (
+      <NavigationContainer>
+        <stack.Navigator headerMode="none">
+          <stack.Screen name="home" component={Home} />
+          <stack.Screen
+            name="DocumentConverter"
+            component={DocumentConverter}
+          />
+        </stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

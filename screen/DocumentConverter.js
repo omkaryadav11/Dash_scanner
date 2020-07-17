@@ -15,7 +15,7 @@ import { Colors } from "react-native-paper";
 import Icon from "react-native-vector-icons/Entypo";
 import CameraButton from "../component/CameraButton";
 
-export default class Home extends React.Component {
+export default class DocumentConverter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,90 +25,13 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const data = [
-      {
-        id: 1,
-        name: `Document 1`,
-        date: "15/7/2020",
-      },
-      {
-        id: 2,
-        name: `Document 2`,
-        date: "15/7/2020",
-      },
-      {
-        id: 3,
-        name: `Document 3`,
-        date: "15/7/2020",
-      },
-      {
-        id: 4,
-        name: `Document 4`,
-        date: "15/7/2020",
-      },
-      // {
-      //   id: 5,
-      //   name: `Document 5`,
-      //   date: "13 march",
-      // },
-      // {
-      //   id: 6,
-      //   name: `Document 6`,
-      //   date: "13 march",
-      // },
-      // {
-      //   id: 7,
-      //   name: `Document 7`,
-      //   date: "13 march",
-      // },
-    ];
-
     return (
       <SafeAreaView style={styles.container}>
         {/* Header */}
-        <Text style={styles.header}>Document Scanner</Text>
-
-        {/* Recent */}
-        <FlatList
-          data={data}
-          renderItem={({ item }) => {
-            return (
-              <View style={styles.FlatList}>
-                <View style={styles.preview}>
-                  <Image
-                    source={require("../assets/sample.jpg")}
-                    style={{ width: "20%", height: "80%", margin: "4%" }}
-                  />
-
-                  <View style={{ marginBottom: "10%" }}>
-                    <Text
-                      style={{ color: "#fff", fontWeight: "400", fontSize: 19 }}
-                    >
-                      {item.name}
-                    </Text>
-
-                    <Text
-                      style={{ color: "#fff", fontWeight: "400", fontSize: 12 }}
-                    >
-                      {item.date}
-                    </Text>
-                  </View>
-                  <Icon
-                    name="dots-three-vertical"
-                    size={20}
-                    color="#fff"
-                    style={{ marginBottom: "10%", marginLeft: "25%" }}
-                  />
-                </View>
-              </View>
-            );
-          }}
-          keyExtractor={(item, index) => index.toString()}
-          style={{ marginTop: 150 }}
-        />
+        <Text style={styles.header}>Document Converter</Text>
 
         {/* Navigation bar */}
-        <CameraButton />
+        <CameraButton add={true} />
         <View style={styles.navigation}>
           {/* Menu Button */}
           <TouchableOpacity
@@ -145,34 +68,25 @@ export default class Home extends React.Component {
             <TouchableWithoutFeedback>
               <View style={styles.Menu}>
                 <Text style={styles.menuHead}>Menu</Text>
-                <TouchableOpacity>
-                  <Text
-                    style={styles.option}
-                    onPress={() => {
-                      this.setState({ menu: false });
-                    }}
-                  >
-                    Document Scanner
-                  </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.props.navigation.navigate("home");
+                    this.setState({ menu: false });
+                  }}
+                >
+                  <Text style={styles.option}>Document Scanner</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
                   <Text style={styles.option}>QR Scanner</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Text
-                    style={styles.option}
-                    onPress={() => {
-                      this.props.navigation.navigate("DocumentConverter");
-                      this.setState({ menu: false });
-                    }}
-                  >
-                    Document Convertor
-                  </Text>
+                  <Text style={styles.option}>Document Convertor</Text>
                 </TouchableOpacity>
               </View>
             </TouchableWithoutFeedback>
           </TouchableOpacity>
         </Modal>
+
         {/* Settings */}
         <Modal
           visible={this.state.settings}
@@ -195,7 +109,6 @@ export default class Home extends React.Component {
             </TouchableWithoutFeedback>
           </TouchableOpacity>
         </Modal>
-
         <StatusBar style="light" />
       </SafeAreaView>
     );
@@ -228,17 +141,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 60,
   },
-  preview: {
-    height: 85,
-    width: 300,
-    backgroundColor: Colors.grey800,
-    borderRadius: 10,
-    alignItems: "center",
-    flexDirection: "row",
-  },
-  FlatList: {
-    height: 110,
-  },
+
   TouchableOpacity: {
     alignItems: "center",
     justifyContent: "center",

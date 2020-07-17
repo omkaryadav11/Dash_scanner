@@ -9,12 +9,19 @@ export default class CameraButton extends Component {
   }
 
   render() {
+    var icon = this.props.add
+      ? require("../assets/add.png")
+      : require("../assets/camera.png");
     return (
       <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            console.log("Clicked");
+          }}
+        >
           <View style={styles.Button}>
             <Image
-              source={require("../assets/camera.png")}
+              source={icon}
               style={{ width: 50, height: 50, borderRadius: 25 }}
             />
           </View>
@@ -33,7 +40,8 @@ const styles = StyleSheet.create({
     width: 75,
     height: 75,
     zIndex: 100,
-    marginBottom: 22,
+    position: "absolute",
+    bottom: "3%",
   },
   Button: {
     backgroundColor: Colors.grey800,
