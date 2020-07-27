@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screen/Home";
+import Login from "./screen/Login";
+import Signup from "./screen/Signup";
 import DocumentConverter from "./screen/DocumentConverter";
 export default class App extends React.Component {
   render() {
@@ -11,6 +13,8 @@ export default class App extends React.Component {
     return (
       <NavigationContainer>
         <stack.Navigator headerMode="none">
+          <stack.Screen name="Login" component={Login}/>
+          <stack.Screen name="Signup" component={Signup}/>
           <stack.Screen name="home" component={Home} />
           <stack.Screen
             name="DocumentConverter"
