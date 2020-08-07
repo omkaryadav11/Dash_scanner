@@ -31,7 +31,9 @@ export default class DocumentConverter extends React.Component {
         <Text style={styles.header}>Document Converter</Text>
 
         {/* Navigation bar */}
+        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("ImageBrowser");}}>
         <CameraButton add={true} />
+        </TouchableOpacity>
         <View style={styles.navigation}>
           {/* Menu Button */}
           <TouchableOpacity

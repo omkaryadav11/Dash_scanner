@@ -20,6 +20,7 @@ export default class App extends React.Component {
             name="DocumentConverter"
             component={DocumentConverter}
           />
+          <stack.Screen name="ImageBrowser" component={ImageBrowser}/>
         </stack.Navigator>
       </NavigationContainer>
     );
