@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { StatusBar } from "expo-status-bar";
-import firebase from '../config/firebase';
+import firebase from "../config/firebase";
 
 import {
   StyleSheet,
@@ -11,69 +11,79 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  Alert
+  Alert,
+  SafeAreaView,
 } from "react-native";
-
 
 export default class Login extends React.Component {
   constructor() {
     super();
-    this.state = { 
-      email: '', 
-      password: '',
-      isLoading: false
-    }
+    this.state = {
+      email: "",
+      password: "",
+      isLoading: false,
+    };
   }
 
   updateInputVal = (val, prop) => {
     const state = this.state;
     state[prop] = val;
     this.setState(state);
-  }
+  };
 
   userLogin = () => {
-    if(this.state.email === '' && this.state.password === '') {
-      Alert.alert('Enter details to signin!')
+    if (this.state.email === "" && this.state.password === "") {
+      Alert.alert("Enter details to signin!");
     } else {
       this.setState({
         isLoading: true,
-      })
+      });
       firebase
-      .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then((res) => {
-        console.log(res)
-        console.log('User logged-in successfully!')
-        this.setState({
-          isLoading: false,
-          email: '', 
-          password: ''
+        .auth()
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then((res) => {
+          // console.log(res);
+          console.log("User logged-in successfully!");
+          this.setState({
+            isLoading: false,
+            email: "",
+            password: "",
+          });
+          this.props.navigation.navigate("home");
         })
-        this.props.navigation.navigate('home')
-      })
-      .catch(error => this.setState({ errorMessage: error.message }))
+        .catch((error) => this.setState({ errorMessage: error.message }));
     }
-  }
+  };
   render() {
-    if(this.state.isLoading){
-      return(
+    if (this.state.isLoading) {
+      return (
         <View style={styles.preloader}>
-          <ActivityIndicator size="large" color="#9E9E9E"/>
+          <ActivityIndicator size="large" color="#9E9E9E" />
         </View>
-      )
-    }    
+      );
+    }
+
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.view1}>
           <Image
-            style={{ width: "50%", height: "50%" }}
+            style={{
+              width: "60%",
+              height: "50%",
+              marginTop: "30%",
+            }}
             source={require("../assets/logo.png")}
           />
 
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity
-              style={{ position: "absolute", bottom: -60, right: 70 }}
-            >
+          <View
+            style={{
+              flexDirection: "row",
+              marginTop: "25%",
+              justifyContent: "space-between",
+              width: "80%",
+            }}
+          >
+            <TouchableOpacity>
               <Text
                 style={{ color: "yellow", fontWeight: "700", fontSize: 20 }}
               >
@@ -82,9 +92,8 @@ export default class Login extends React.Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={{ position: "absolute", bottom: -60, left: 65 }}
               onPress={() => {
-                this.props.navigation.navigate("signup");
+                this.props.navigation.navigate("Signup");
               }}
             >
               <Text
@@ -98,17 +107,15 @@ export default class Login extends React.Component {
 
         <View style={styles.view2}>
           <TextInput
-            
             placeholder="Username"
             style={[styles.username, { marginBottom: 30 }]}
-            onChangeText={(val)=> this.updateInputVal(val,'email')}
+            onChangeText={(val) => this.updateInputVal(val, "email")}
             value={this.state.email}
           />
           <TextInput
-          
             placeholder="Password"
             style={[styles.username, { marginBottom: 30 }]}
-            onChangeText={(val)=>this.updateInputVal(val,'password')}
+            onChangeText={(val) => this.updateInputVal(val, "password")}
             value={this.state.password}
             maxLength={8}
             secureTextEntry
@@ -121,9 +128,8 @@ export default class Login extends React.Component {
         </View>
 
         <StatusBar style="light" />
-      </View>
+      </SafeAreaView>
     );
-            
   }
 }
 
@@ -131,12 +137,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    // alignItems: "center",
   },
   view1: {
     flex: 3,
     backgroundColor: "#000000",
     alignItems: "center",
-    justifyContent: "center",
   },
   view2: {
     flex: 2,
@@ -151,5 +157,8 @@ const styles = StyleSheet.create({
     borderRadius: 23,
     padding: 5,
     textAlign: "center",
+  },
+  preloader: {
+    alignSelf: "center",
   },
 });

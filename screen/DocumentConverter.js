@@ -31,8 +31,13 @@ export default class DocumentConverter extends React.Component {
         <Text style={styles.header}>Document Converter</Text>
 
         {/* Navigation bar */}
-        <TouchableOpacity onPress={()=>{this.props.navigation.navigate("ImageBrowser");}}>
-        <CameraButton add={true} />
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate("ImageBrowser");
+          }}
+          style={styles.button}
+        >
+          <CameraButton add={true} />
         </TouchableOpacity>
         <View style={styles.navigation}>
           {/* Menu Button */}
@@ -78,7 +83,12 @@ export default class DocumentConverter extends React.Component {
                 >
                   <Text style={styles.option}>Document Scanner</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.props.navigation.navigate("QR");
+                    this.setState({ menu: false });
+                  }}
+                >
                   <Text style={styles.option}>QR Scanner</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
@@ -105,7 +115,7 @@ export default class DocumentConverter extends React.Component {
                 <Text style={styles.menuHead}>Settings</Text>
                 <Text style={styles.option}>Theme</Text>
                 <Text style={styles.option}>Storage</Text>
-                <Text style={styles.option}>Feedbackr</Text>
+                <Text style={styles.option}>Feedback</Text>
                 <Text style={[styles.option, { marginBottom: 50 }]}>About</Text>
               </View>
             </TouchableWithoutFeedback>
@@ -178,5 +188,10 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontWeight: "600",
     marginBottom: 25,
+  },
+  button: {
+    position: "absolute",
+    bottom: "3%",
+    zIndex: 10,
   },
 });

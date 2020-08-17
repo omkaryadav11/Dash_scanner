@@ -15,7 +15,7 @@ import { Colors } from "react-native-paper";
 import Icon from "react-native-vector-icons/Entypo";
 import CameraButton from "../component/CameraButton";
 
-export default class Home extends React.Component {
+export default class QR extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,51 +25,51 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const data = [
-      {
-        id: 1,
-        name: `Document 1`,
-        date: "15/7/2020",
-      },
-      {
-        id: 2,
-        name: `Document 2`,
-        date: "15/7/2020",
-      },
-      {
-        id: 3,
-        name: `Document 3`,
-        date: "15/7/2020",
-      },
-      {
-        id: 4,
-        name: `Document 4`,
-        date: "15/7/2020",
-      },
-      // {
-      //   id: 5,
-      //   name: `Document 5`,
-      //   date: "13 march",
-      // },
-      // {
-      //   id: 6,
-      //   name: `Document 6`,
-      //   date: "13 march",
-      // },
-      // {
-      //   id: 7,
-      //   name: `Document 7`,
-      //   date: "13 march",
-      // },
-    ];
+    // const data = [
+    //   {
+    //     id: 1,
+    //     name: `Document 1`,
+    //     date: "15/7/2020",
+    //   },
+    //   {
+    //     id: 2,
+    //     name: `Document 2`,
+    //     date: "15/7/2020",
+    //   },
+    //   {
+    //     id: 3,
+    //     name: `Document 3`,
+    //     date: "15/7/2020",
+    //   },
+    //   {
+    //     id: 4,
+    //     name: `Document 4`,
+    //     date: "15/7/2020",
+    //   },
+    //   // {
+    //   //   id: 5,
+    //   //   name: `Document 5`,
+    //   //   date: "13 march",
+    //   // },
+    //   // {
+    //   //   id: 6,
+    //   //   name: `Document 6`,
+    //   //   date: "13 march",
+    //   // },
+    //   // {
+    //   //   id: 7,
+    //   //   name: `Document 7`,
+    //   //   date: "13 march",
+    //   // },
+    // ];
 
     return (
       <SafeAreaView style={styles.container}>
         {/* Header */}
-        <Text style={styles.header}>Document Scanner</Text>
+        <Text style={styles.header}>QR Scanner</Text>
 
         {/* Recent */}
-        <FlatList
+        {/* <FlatList
           data={data}
           renderItem={({ item }) => {
             return (
@@ -105,7 +105,7 @@ export default class Home extends React.Component {
           }}
           keyExtractor={(item, index) => index.toString()}
           style={{ marginTop: 150 }}
-        />
+        /> */}
 
         {/* Navigation bar */}
         <TouchableOpacity style={styles.button}>
@@ -153,28 +153,29 @@ export default class Home extends React.Component {
                     style={styles.option}
                     onPress={() => {
                       this.props.navigation.navigate("DocumentConverter");
-                      this.setState({ menu: false });
                     }}
                   >
                     Document Converter
                   </Text>
                 </TouchableOpacity>
-
                 <TouchableOpacity
                   onPress={() => {
-                    this.props.navigation.navigate("QR");
+                    this.props.navigation.navigate("home");
                     this.setState({ menu: false });
                   }}
                 >
-                  <Text style={styles.option}>QR Scanner</Text>
+                  <Text style={styles.option}>Document Scanner</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("DocumentConverter");
-                    this.setState({ menu: false });
-                  }}
-                >
-                  <Text style={styles.option}>Document Convertor</Text>
+                <TouchableOpacity>
+                  <Text
+                    style={styles.option}
+                    onPress={() => {
+                      this.props.navigation.navigate("DocumentConverter");
+                      this.setState({ menu: false });
+                    }}
+                  >
+                    Document Convertor
+                  </Text>
                 </TouchableOpacity>
               </View>
             </TouchableWithoutFeedback>
