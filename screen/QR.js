@@ -1,12 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import React, { Component } from "react";
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
   SafeAreaView,
-  FlatList,
-  Image,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Modal,
@@ -25,93 +23,17 @@ export default class QR extends React.Component {
   }
 
   render() {
-    // const data = [
-    //   {
-    //     id: 1,
-    //     name: `Document 1`,
-    //     date: "15/7/2020",
-    //   },
-    //   {
-    //     id: 2,
-    //     name: `Document 2`,
-    //     date: "15/7/2020",
-    //   },
-    //   {
-    //     id: 3,
-    //     name: `Document 3`,
-    //     date: "15/7/2020",
-    //   },
-    //   {
-    //     id: 4,
-    //     name: `Document 4`,
-    //     date: "15/7/2020",
-    //   },
-    //   // {
-    //   //   id: 5,
-    //   //   name: `Document 5`,
-    //   //   date: "13 march",
-    //   // },
-    //   // {
-    //   //   id: 6,
-    //   //   name: `Document 6`,
-    //   //   date: "13 march",
-    //   // },
-    //   // {
-    //   //   id: 7,
-    //   //   name: `Document 7`,
-    //   //   date: "13 march",
-    //   // },
-    // ];
-
     return (
       <SafeAreaView style={styles.container}>
         {/* Header */}
         <Text style={styles.header}>QR Scanner</Text>
-
-        {/* Recent */}
-        {/* <FlatList
-          data={data}
-          renderItem={({ item }) => {
-            return (
-              <View style={styles.FlatList}>
-                <View style={styles.preview}>
-                  <Image
-                    source={require("../assets/sample.jpg")}
-                    style={{ width: "20%", height: "80%", margin: "4%" }}
-                  />
-
-                  <View style={{ marginBottom: "10%" }}>
-                    <Text
-                      style={{ color: "#fff", fontWeight: "400", fontSize: 19 }}
-                    >
-                      {item.name}
-                    </Text>
-
-                    <Text
-                      style={{ color: "#fff", fontWeight: "400", fontSize: 12 }}
-                    >
-                      {item.date}
-                    </Text>
-                  </View>
-                  <Icon
-                    name="dots-three-vertical"
-                    size={20}
-                    color="#fff"
-                    style={{ marginBottom: "10%", marginLeft: "25%" }}
-                  />
-                </View>
-              </View>
-            );
-          }}
-          keyExtractor={(item, index) => index.toString()}
-          style={{ marginTop: 150 }}
-        /> */}
-
         {/* Navigation bar */}
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate("Scan")}
+        >
           <CameraButton />
         </TouchableOpacity>
-
         <View style={styles.navigation}>
           {/* Menu Button */}
           <TouchableOpacity
@@ -133,54 +55,56 @@ export default class QR extends React.Component {
             <Icon name="dots-three-vertical" size={25} color="#9BA0A6" />
           </TouchableOpacity>
         </View>
-
         {/* Menu */}
-        <Modal
-          visible={this.state.menu}
-          transparent={true}
-          animationType="slide"
-          onRequestClose={() => this.setState({ menu: false })}
-        >
-          <TouchableOpacity
-            style={styles.TouchableOpacity}
-            onPress={() => this.setState({ menu: false })}
+        <View style={{ backgroundColor: "red" }}>
+          <Modal
+            visible={this.state.menu}
+            transparent={true}
+            animationType="slide"
+            onRequestClose={() => this.setState({ menu: false })}
           >
-            <TouchableWithoutFeedback>
-              <View style={styles.Menu}>
-                <Text style={styles.menuHead}>Menu</Text>
-                <TouchableOpacity>
-                  <Text
-                    style={styles.option}
+            <TouchableOpacity
+              style={styles.TouchableOpacity}
+              onPress={() => this.setState({ menu: false })}
+            >
+              <TouchableWithoutFeedback>
+                <View style={styles.Menu}>
+                  <Text style={styles.menuHead}>Menu</Text>
+                  <TouchableOpacity>
+                    <Text
+                      style={styles.option}
+                      onPress={() => {
+                        this.props.navigation.navigate("home");
+                        this.setState({ menu: false });
+                      }}
+                    >
+                      Document Scanner
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
                     onPress={() => {
-                      this.props.navigation.navigate("DocumentConverter");
-                    }}
-                  >
-                    Document Converter
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("home");
-                    this.setState({ menu: false });
-                  }}
-                >
-                  <Text style={styles.option}>Document Scanner</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text
-                    style={styles.option}
-                    onPress={() => {
-                      this.props.navigation.navigate("DocumentConverter");
+                      this.props.navigation.navigate("QR");
                       this.setState({ menu: false });
                     }}
                   >
-                    Document Convertor
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </TouchableWithoutFeedback>
-          </TouchableOpacity>
-        </Modal>
+                    <Text style={styles.option}>Qr Scanner</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text
+                      style={styles.option}
+                      onPress={() => {
+                        this.props.navigation.navigate("DocumentConverter");
+                        this.setState({ menu: false });
+                      }}
+                    >
+                      Document Convertor
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </TouchableWithoutFeedback>
+            </TouchableOpacity>
+          </Modal>
+        </View>
         {/* Settings */}
         <Modal
           visible={this.state.settings}
@@ -203,7 +127,6 @@ export default class QR extends React.Component {
             </TouchableWithoutFeedback>
           </TouchableOpacity>
         </Modal>
-
         <StatusBar style="light" />
       </SafeAreaView>
     );
@@ -253,10 +176,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   Menu: {
+    position: "absolute",
     width: "100%",
     height: "35%",
     backgroundColor: Colors.grey900,
-    marginTop: "135%",
+    bottom: 0,
     alignItems: "center",
     justifyContent: "center",
   },

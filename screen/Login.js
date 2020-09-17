@@ -111,6 +111,7 @@ export default class Login extends React.Component {
             style={[styles.username, { marginBottom: 30 }]}
             onChangeText={(val) => this.updateInputVal(val, "email")}
             value={this.state.email}
+            keyboardType="email-address"
           />
           <TextInput
             placeholder="Password"

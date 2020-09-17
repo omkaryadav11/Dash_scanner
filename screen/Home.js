@@ -152,11 +152,11 @@ export default class Home extends React.Component {
                   <Text
                     style={styles.option}
                     onPress={() => {
-                      this.props.navigation.navigate("DocumentConverter");
+                      this.props.navigation.navigate("home");
                       this.setState({ menu: false });
                     }}
                   >
-                    Document Converter
+                    Document Scanner
                   </Text>
                 </TouchableOpacity>
 

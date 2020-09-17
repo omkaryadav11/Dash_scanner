@@ -91,7 +91,12 @@ export default class DocumentConverter extends React.Component {
                 >
                   <Text style={styles.option}>QR Scanner</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.props.navigation.navigate("DocumentConverter");
+                    this.setState({ menu: false });
+                  }}
+                >
                   <Text style={styles.option}>Document Convertor</Text>
                 </TouchableOpacity>
               </View>
